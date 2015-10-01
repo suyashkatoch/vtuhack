@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Basic Form</title>
+	<link rel="stylesheet" href="assets/demo.css">
+	<link rel="stylesheet" href="assets/form-basic.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js"></script>
+	<script type="text/javascript">
+    var estat = 0;
+    var pstat = 0;
+
+  $(document).ready(function()
+  {
+    $('#email').keyup(function()
+    {
+        //var emaile = $('#email').val();
+        var vall = $('#email').val();       
+		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!filter.test(vall))
+        {
+            document.getElementById("err-inval").innerHTML = "Invalid Email.";
+        }
+        else
+        {
+            estat = 1;
+            document.getElementById("err-val").innerHTML = "Valid Email.";
+        }
+    });
+
+    $('#password').keyup(function()
+    {
+        var pval = $('#password').val().length;
+        if(pval<8)
+            document.getElementById("err-inval").innerHTML = "Password Should Be 8-12 Characters Long";
+        else
+        {
+            pstat = 1;
+            document.getElementById("err-val").innerHTML = "Password Ok";
+        }
+    });
+
+    $('#sub').click(function()
+    {
+        if(estat==1 && pstat==1)
+        {
+            window.location.href='https://talentspear.com/geeks/images/web_challenge.png';
+            return false;            
+        }
+        else
+        {
+            alert("Please Entrer Valid Email ID and Password");
+        }
+    });
+  });
+
+</script>
+</head>
+
+    <div class="main-content">
+
+        <!-- You only need this form and the form-basic.css -->
+
+        <form class="form-basic" method="post" action="#">
+
+
+            <div class="form-title-row">
+                <h1>Login Form</h1>
+            </div>
+            <div class="form-row">
+                <label>
+                    <span>Email</span>
+                    <input type="email" name="email" id="email">
+                    <span id="err-inval" style="color:red"></span>
+                    <span id="err-val" style="color:green"></span>
+                </label>
+                
+            </div>
+
+            <div class="form-row">
+                <label>
+                    <span>Password</span>
+                    <input type="password" name="password" id="password">
+                </label>
+                <span id="err-inval" style="color:red"></span>
+                <span id="err-val" style="color:green"></span>
+            </div>
+
+            <div class="form-row">
+                <center><button type="submit" id="sub" onClick="return validate(this)">Login</button></center>
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
